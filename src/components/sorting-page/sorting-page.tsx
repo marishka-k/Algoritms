@@ -139,7 +139,7 @@ export const SortingPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Сортировка массива">
-      <div className={styles.form}>
+      <div className={styles.content}>
         <div className={styles.group}>
           <RadioInput
             disabled={loadTarget === ascending || loadTarget === descending}
@@ -180,6 +180,7 @@ export const SortingPage: React.FC = () => {
             disabled={loadTarget === ascending || loadTarget === descending}
             text="Новый массив"
             onClick={getNewArr}
+            extraClass="ml-15"
           />
         </div>
       </div>
