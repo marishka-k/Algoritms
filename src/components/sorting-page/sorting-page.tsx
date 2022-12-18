@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Direction } from "../../types/direction";
 import { ElementStates } from "../../types/element-states";
@@ -187,7 +188,7 @@ export const SortingPage: React.FC = () => {
       <ul className={styles.list}>
         {numbersArray.map((element: TSortingPageItem, index: number) => {
           return (
-            <Column key={index} index={element.number} state={element.state} />
+            <Column key={nanoid()} index={element.number} state={element.state} />
           );
         })}
       </ul>
