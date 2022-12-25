@@ -290,7 +290,7 @@ export const ListPage: React.FC = () => {
             min={1}
             value={value || ""}
             onChange={(e: React.FormEvent<HTMLInputElement>) =>
-              setValue(e.currentTarget.value)
+              setValue(e.currentTarget.value.trim())
             }
             isLimitText={true}
             maxLength={4}
