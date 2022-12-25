@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import React, { FC, FormEvent, useEffect, useState } from "react";
 import { ElementStates } from "../../types/element-states";
 import { delayN } from "../../utils/delays";
@@ -17,7 +16,7 @@ export const StringComponent: FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
-    if (!inputValue) {
+    if (inputValue) {
       setDisabledButton(false);
     } else {
       setDisabledButton(true);
@@ -25,7 +24,7 @@ export const StringComponent: FC = () => {
   }, [inputValue]);
 
   const onChange = (evt: FormEvent<HTMLInputElement>): void => {
-    const string = evt.currentTarget.value.trim();
+    const string =  evt.currentTarget.value[0] !== ' ' ? evt.currentTarget.value.trim() : '';
     setInputValue(string);
   };
 
@@ -83,6 +82,7 @@ export const StringComponent: FC = () => {
     <SolutionLayout title="Строка">
       <div className={styles.content}>
         <Input
+          pattern=""
           isLimitText={true}
           maxLength={11}
           value={inputValue}
@@ -97,10 +97,10 @@ export const StringComponent: FC = () => {
         />
       </div>
       <ul className={styles.list}>
-        {reversArray.map((letter: string, index: number) => {
+        {reversArray.map((letter, index) => {
           return (
             <Circle
-              key={nanoid()}
+              key={index}
               index={index + 1}
               letter={letter}
               state={stateCircle(currentIndex, index, reversArray)}

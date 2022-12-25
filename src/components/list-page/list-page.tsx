@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
 
 import { ElementStates } from "../../types/element-states";
 import { IListItem } from "../../types/listpage";
@@ -92,7 +91,7 @@ export const ListPage: React.FC = () => {
   }, []);
 
   const addUpperCircleAddind = (
-    arr: any,
+    arr: Array<IListItem>,
     index: number,
     value: string | null
   ) => {
@@ -106,7 +105,7 @@ export const ListPage: React.FC = () => {
     };
   };
 
-  const removeUpperCircleAddind = (arr: any, index: number) => {
+  const removeUpperCircleAddind = (arr: Array<IListItem>, index: number) => {
     const firstElement = arr[index];
     arr[index] = {
       ...firstElement,
@@ -118,7 +117,7 @@ export const ListPage: React.FC = () => {
   };
 
   const addLowerCircleRemoval = (
-    arr: any,
+    arr: Array<IListItem>,
     index: number,
     value?: string | null
   ) => {
@@ -360,7 +359,7 @@ export const ListPage: React.FC = () => {
       <ul className={styles.circle_block}>
         {arrayOfCircles.map((item, index) => {
           return (
-            <li className={styles.circle_list} key={nanoid()}>
+            <li className={styles.circle_list} key={index}>
               <Circle
                 state={item.state}
                 letter={item.name}

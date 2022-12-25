@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import React, { FormEvent, useEffect, useMemo, useState } from "react";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
@@ -50,8 +49,8 @@ export const QueuePage: React.FC = () => {
     } else {
       setDisabledDelButton(false);
     }
-  }, [queue, isAdding]);
-
+  }, [queue, isAdding, elements]);
+  
   const enqueue = async () => {
     const arr = [...elements];
     if (arr[MAX_SIZE-1].tail === "tail") {
@@ -67,12 +66,15 @@ export const QueuePage: React.FC = () => {
       arr[head.index].head = "head";
 
       if (tail.index > 0) arr[tail.index - 1].tail = "";
-
-      arr[tail.index].name = tail.item;
-      arr[tail.index].tail = "tail";
       arr[tail.index].state = ElementStates.Changing;
       await delayS();
-      setElements([...arr]);
+      arr[tail.index].name = tail.item;
+      arr[tail.index].tail = "tail";
+      setElements([...arr]);   
+      arr[tail.index].state = ElementStates.Default;
+      await delayS();
+      
+      setElements([...arr]);      
       resetInput();
       setIsAdding(false);
     }
@@ -127,19 +129,19 @@ export const QueuePage: React.FC = () => {
           <Button
             disabled={disabledAddButton}
             text="Добавить"
-            onClick={() => enqueue()}
+            onClick={enqueue}
             isLoader={isAdding}
           />
           <Button
             text="Удалить"
-            onClick={() => dequeue()}
+            onClick={dequeue}
             disabled={disabledDelButton}
             isLoader={isDeleting}
           />
         </div>
         <Button
           text="Очистить"
-          onClick={() => clear()}
+          onClick={clear}
           disabled={disabledDelButton}
         />
       </div>
@@ -147,7 +149,7 @@ export const QueuePage: React.FC = () => {
         {elements.map((item, index: number) => {
           return (
             <Circle
-              key={nanoid()}
+              key={index}
               letter={item.name as string}
               index={index}
               state={item.state}

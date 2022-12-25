@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import React, { FormEvent, useEffect, useState } from "react";
 import { ElementStates } from "../../types/element-states";
 import { Button } from "../ui/button/button";
@@ -130,10 +129,10 @@ export const StackPage: React.FC = () => {
         />
       </div>
       <ul className={styles.list}>
-        {arr.map((item, index: number) => {
+        {arr.map((item, index) => {
           return (
             <Circle
-              key={nanoid()}
+              key={index}
               letter={item.item}
               index={index}
               state={item.state}

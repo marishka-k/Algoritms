@@ -75,7 +75,7 @@ export const FibonacciPage: React.FC = () => {
       </div>
       <ul className={styles.list}>
         {fibArray &&
-          fibArray.map((elem: number, index: number) => {
+          fibArray.map((elem, index) => {
             return <Circle key={index} letter={`${elem}`} index={index} />;
           })}
       </ul>
