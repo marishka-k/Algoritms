@@ -24,15 +24,11 @@ export const StringComponent: FC = () => {
   }, [inputValue]);
 
   const onChange = (evt: FormEvent<HTMLInputElement>): void => {
-    const string =  evt.currentTarget.value[0] !== ' ' ? evt.currentTarget.value.trim() : '';
+    const string =  evt.currentTarget.value.trim();
     setInputValue(string);
   };
 
-  const stateCircle = (
-    index: number,
-    currentIndex: number,
-    arr: Array<string | number>
-  ) => {
+  const stateCircle = (index: number, currentIndex: number, arr: Array<string | number>) => {
     let arrLength = arr.length - 1;
 
     if (currentIndex < index || currentIndex > arrLength - index) {
@@ -82,7 +78,6 @@ export const StringComponent: FC = () => {
     <SolutionLayout title="Строка">
       <div className={styles.content}>
         <Input
-          pattern=""
           isLimitText={true}
           maxLength={11}
           value={inputValue}
