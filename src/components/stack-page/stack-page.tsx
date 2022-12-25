@@ -22,6 +22,7 @@ export const StackPage: React.FC = () => {
   const [disabledAddButton, setDisabledAddButton] = useState<boolean>(false);
   const [disabledDelButton, setDisabledDelButton] = useState<boolean>(true);
   const [isLoad, setIsLoad] = useState<boolean>(false);
+  const [activeLoadButton, setActiveLoadButton] = useState<string>("");
 
   const onChange = (evt: FormEvent<HTMLInputElement>): void => {
     const string = evt.currentTarget.value.trim();
@@ -54,32 +55,43 @@ export const StackPage: React.FC = () => {
 
   const push = async () => {
     setIsLoad(true);
+    setActiveLoadButton("push")
     stackValues.push(inputValue);
+    if (arr.length >= 1){
+      arr[arr.length-1].head = undefined
+    }
+    setArr([...arr])
     arr.push({
       item: inputValue,
-      state: ElementStates.Changing,     
-    });
-    setArr([...arr]);
+      state: ElementStates.Changing,
+      head: "top",     
+    });    
+    setArr([...arr]);   
     await delayS();
     arr[arr.length - 1].state = ElementStates.Default;
     setArr([...arr]);
     setInputValue("");
+    setActiveLoadButton("")
     setIsLoad(false);
   };
 
   const pop = async () => {
     setIsLoad(true);
+    setActiveLoadButton("pop")
     stackValues!.pop();
     const size = stackValues.getSize();
     if (size !== 0) {
-      arr[arr.length - 1].state = ElementStates.Changing;      
+      arr[arr.length - 1].state = ElementStates.Changing;
       setArr([...arr]);
       arr.pop();
+      
       await delayS();
+      arr[arr.length - 1].head = "top";
       setArr([...arr]);
     } else {
       setArr([]);
     }
+    setActiveLoadButton("")
     setIsLoad(false);
   };
 
@@ -100,13 +112,15 @@ export const StackPage: React.FC = () => {
           />
           <Button
             disabled={disabledAddButton}
+            isLoader={activeLoadButton === "push"}
             text="Добавить"
             onClick={() => push()}
           />
           <Button
-            text="Удалить"
-            onClick={() => pop()}
             disabled={disabledDelButton}
+            isLoader={activeLoadButton === "pop"}
+            text="Удалить"
+            onClick={() => pop()}            
           />
         </div>
         <Button
@@ -123,6 +137,7 @@ export const StackPage: React.FC = () => {
               letter={item.item}
               index={index}
               state={item.state}
+              head={item.head}
             />
           );
         })}
