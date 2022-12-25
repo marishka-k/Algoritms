@@ -146,7 +146,7 @@ export const QueuePage: React.FC = () => {
         />
       </div>
       <ul className={styles.list}>
-        {elements.map((item, index: number) => {
+        {elements.map((item, index) => {
           return (
             <Circle
               key={index}

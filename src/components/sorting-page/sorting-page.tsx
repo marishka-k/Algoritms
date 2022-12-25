@@ -185,7 +185,7 @@ export const SortingPage: React.FC = () => {
         </div>
       </div>
       <ul className={styles.list}>
-        {numbersArray.map((element: TSortingPageItem, index: number) => {
+        {numbersArray.map((element, index) => {
           return (
             <Column key={index} index={element.number} state={element.state} />
           );
