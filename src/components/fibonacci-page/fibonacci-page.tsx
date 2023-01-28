@@ -56,8 +56,10 @@ export const FibonacciPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
-      <div className={styles.content}>
+      <div className={styles.content} data-cy="content">
         <Input
+          data-cy="input"
+          disabled={isLoad ? true : false}
           type="number"
           isLimitText={true}
           maxLength={2}
@@ -66,6 +68,7 @@ export const FibonacciPage: React.FC = () => {
           onChange={onChange}          
         />
         <Button
+          data-cy="calculate"
           text="Рассчитать"
           extraClass="ml-6"
           disabled={disabledButton}
