@@ -178,8 +178,9 @@ export const ListPage: React.FC = () => {
     const TailValue = linkedList!.getNodeByIndex(tailIdx);
     addUpperCircleAddind(copyArr, tailIdx - 1, TailValue);
     setArrayCircles([...copyArr]);
-    await delayS();
+    
     removeUpperCircleAddind(copyArr, tailIdx - 1);
+    await delayS();
     copyArr[copyArr.length] = {
       ...copyArr[copyArr.length],
       name: TailValue ? TailValue : "",
@@ -281,9 +282,10 @@ export const ListPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Связный список">
-      <div className={styles.container}>
+      <div className={styles.content} data-cy="content">
         <div className={styles.input_container}>
           <Input
+            data-cy="inputName"
             extraClass={styles.input}
             disabled={isLoad && activeLoadButton !== ""}
             placeholder="Введите значение"
@@ -296,6 +298,7 @@ export const ListPage: React.FC = () => {
             maxLength={4}
           />
           <Button
+            data-cy="addToHead" 
             isLoader={activeLoadButton === "addToHead"}
             disabled={disabledAddToHeadBtn}
             text="Добавить в head"
@@ -303,6 +306,7 @@ export const ListPage: React.FC = () => {
             onClick={() => addToHead()}
           />
           <Button
+            data-cy="addToTail"
             isLoader={activeLoadButton === "addToTail"}
             disabled={disabledAddToTailBtn}
             text="Добавить в tail"
@@ -310,6 +314,7 @@ export const ListPage: React.FC = () => {
             onClick={() => addToTail()}
           />
           <Button
+            data-cy="removeFromHead"
             disabled={arrayOfCircles.length <= 1 || (isLoad && activeLoadButton !== "" && activeLoadButton !== "removeFromHead")}
             isLoader={activeLoadButton === "removeFromHead"}
             text="Удалить из head"
@@ -317,6 +322,7 @@ export const ListPage: React.FC = () => {
             onClick={() => removeFromHead()}
           />
           <Button
+            data-cy="removeFromTail"
             disabled={arrayOfCircles.length <= 1 || (isLoad && activeLoadButton !== "" && activeLoadButton !== "removeFromTail")}
             isLoader={activeLoadButton === "removeFromTail"}
             text="Удалить из tail"
@@ -327,6 +333,7 @@ export const ListPage: React.FC = () => {
 
         <div className={styles.index_container}>
           <Input
+            data-cy="inputIndex"
             type="text"
             width={"100%"}
             extraClass={styles.input}
@@ -341,6 +348,7 @@ export const ListPage: React.FC = () => {
             }
           />
           <Button
+            data-cy="addToIndex"
             disabled={disabledAddToIndexBtn}
             isLoader={activeLoadButton === "addToIndex"}
             text="Добавить по индексу"
@@ -348,6 +356,7 @@ export const ListPage: React.FC = () => {
             onClick={() => idx && addToIndex(idx)}
           />
           <Button
+            data-cy="removeToIndex"
             disabled={disabledRemoveToIndexBtn}
             isLoader={activeLoadButton === "removeToIndex"}
             text="Удалить по индексу"

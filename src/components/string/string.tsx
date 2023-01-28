@@ -5,8 +5,10 @@ import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
+import { swap } from "./utils";
 
 import styles from "./string.module.css";
+
 
 export const StringComponent: FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -38,10 +40,6 @@ export const StringComponent: FC = () => {
       return ElementStates.Changing;
     }
     return ElementStates.Default;
-  };
-
-  const swap = (arr: Array<string>, left: number, right: number): void => {
-    [arr[left], arr[right - left]] = [arr[right - left], arr[left]];
   };
 
   const revers = async (string: string): Promise<Array<string>> => {
@@ -76,14 +74,17 @@ export const StringComponent: FC = () => {
 
   return (
     <SolutionLayout title="Строка">
-      <div className={styles.content}>
+      <div className={styles.content} data-cy="content">
         <Input
+          data-cy="input"
+          disabled={isLoad ? true : false}
           isLimitText={true}
           maxLength={11}
           value={inputValue}
           onChange={onChange}
         />
         <Button
+          data-cy="unwrap"
           text="Развернуть"
           extraClass="ml-6"
           disabled={disabledButton}

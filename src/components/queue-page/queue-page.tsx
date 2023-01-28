@@ -117,9 +117,10 @@ export const QueuePage: React.FC = () => {
 
   return (
     <SolutionLayout title="Очередь">
-      <div className={styles.content}>
+      <div className={styles.content} data-cy="content">
         <div className={styles.input_group}>
           <Input
+            data-cy="input"
             onChange={onChange}
             disabled={isAdding || isDeleting }
             isLimitText={true}
@@ -127,12 +128,14 @@ export const QueuePage: React.FC = () => {
             value={inputValue}
           />
           <Button
+            data-cy="add"
             disabled={disabledAddButton}
             text="Добавить"
             onClick={enqueue}
             isLoader={isAdding}
           />
           <Button
+            data-cy="del"
             text="Удалить"
             onClick={dequeue}
             disabled={disabledDelButton}
@@ -140,6 +143,7 @@ export const QueuePage: React.FC = () => {
           />
         </div>
         <Button
+          data-cy="clear"
           text="Очистить"
           onClick={clear}
           disabled={disabledDelButton}

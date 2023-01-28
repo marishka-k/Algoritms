@@ -100,9 +100,10 @@ export const StackPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Стек">
-      <div className={styles.content}>
+      <div className={styles.content} data-cy="content">
         <div className={styles.input_group}>
           <Input
+            data-cy="input"
             disabled={inputDisabled}
             onChange={onChange}
             isLimitText={true}
@@ -110,12 +111,14 @@ export const StackPage: React.FC = () => {
             value={inputValue}
           />
           <Button
+            data-cy="push"
             disabled={disabledAddButton}
             isLoader={activeLoadButton === "push"}
             text="Добавить"
             onClick={() => push()}
           />
           <Button
+            data-cy="pop"
             disabled={disabledDelButton}
             isLoader={activeLoadButton === "pop"}
             text="Удалить"
@@ -123,6 +126,7 @@ export const StackPage: React.FC = () => {
           />
         </div>
         <Button
+          data-cy="clear"
           text="Очистить"
           onClick={() => cleen()}
           disabled={disabledDelButton}
